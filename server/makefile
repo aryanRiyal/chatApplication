@@ -1,21 +1,21 @@
-$(CC) = gcc 
-
-runS: server.o createServerSocket.o serverRecvSend.o clientHandle.o
-    $(CC) -o runS server.o createServerSocket.o serverRecvSend.o clientHandle.o
+CC = gcc 
+LIBPATH = ../lib/
+LIB = createServerSocket.o  serverRecvSend.o clientHandle.o
+HEADER = $(LIBPATH)header.h
+runS: server.o $(LIB)
+	$(CC) -o runS server.o $(LIB)
 
 server.o: server.c
-    $(CC) -c server.c
+	$(CC) -c server.c
 
-createServerSocket.o: ../lib/createServerSocket.c ../lib/header.h
-    $(CC) -c ../lib/createServerSocket.c
+createServerSocket.o: $(LIBPATH)createServerSocket.c $(HEADER)
+	$(CC) -c ../lib/createServerSocket.c
 
-serverRecvSend.o: ../lib/serverRecvSend.c ../lib/header.h  
-    $(CC) -c ../lib/serverRecvSend.c
+serverRecvSend.o: $(LIBPATH)serverRecvSend.c $(HEADER)  
+	$(CC) -c $(LIBPATH)serverRecvSend.c
 
-clientHandle.o: ../lib/clientHandle.c  ../lib/header.h         
-    $(CC) -c ../lib/clientHandle.c
-
-.phony: clean
+clientHandle.o: $(LIBPATH)clientHandle.c  $(HEADER)         
+	$(CC) -c $(LIBPATH)clientHandle.c
 
 clean: 
-	rm *.o
+	rm $(LIB) server.o runS
