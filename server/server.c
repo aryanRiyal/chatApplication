@@ -4,8 +4,6 @@ int main(void){
     int listenfd=0;
     int maxfd=0;
     int newSocketfd=0;
-    // struct sockaddr_in clientAddress;
-    //socklen_t addr_size;
     int n_client=0;
     char buff[MB];
 
