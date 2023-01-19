@@ -1,3 +1,5 @@
+#include"header.h"
+
 /* socket() */
 int Socket( int family, int type, int protocol){
     int n;
@@ -33,7 +35,7 @@ void createClientSocket(int *sockfd, char *IP){
 
     if(inet_pton(AF_INET, IP, &serverAddress.sin_addr)<=0){
         printf("[-]inet_pton Error for %s\n", IP);
-        close(sockfd);
+        close(*sockfd);
         exit(EXIT_FAILURE);
     }
 

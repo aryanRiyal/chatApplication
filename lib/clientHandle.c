@@ -1,3 +1,5 @@
+#include"header.h"
+
 /* accept() */
 int Accept( int sockfd, SA *addr, socklen_t *addrlen){
     int n;
@@ -18,5 +20,5 @@ void clientHandle( int listenfd, int *newSocketfd){
     *newSocketfd = Accept( listenfd, (SA *)&clientAddress, &len);
      
     // addNewClient();
-    printf("[+]New Socket Created %di\n", *newSocketfd);
+    printf("[+]New Socket Created %d\n", *newSocketfd);
 }

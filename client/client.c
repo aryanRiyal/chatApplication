@@ -9,7 +9,7 @@ int main(int argc, char *argv[]){
 
     int sockfd=0;
     int maxfd=0;
-    char buff[MV];
+    char buff[MB];
 
     createClientSocket( &sockfd, argv[1]);
     
@@ -20,13 +20,14 @@ int main(int argc, char *argv[]){
         printf("Client: ");
         scanf("%[^\n]%*c", buff);
         
-        Send( sockfd, buff, strlen(buff), 0);
+        send( sockfd, buff, strlen(buff), 0);
         if(strncmp( buff, ":exit", 5) == 0){
             close(sockfd);
             printf("[-]Disconnected from server.\n");
             exit(1);
-        }
-        Recv( sockfd, buff, MAXLINE, 0);
+	}
+
+        recv( sockfd, buff, MAXLINE, 0);
         printf("Server: %s\n", buff);	
         /*if(strncmp( buff, ":exit", 5) == 0){
             close(clientSocket);

@@ -1,14 +1,16 @@
 //Header
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/socket.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <sys/un.h>
-#include <time.h>
-#include <errno.h>
+#include <sys/time.h>
+#include <sys/errno.h>
 
 //Macros
 #define MB 1024
@@ -55,4 +57,3 @@ void clientHandle( int listenfd, int *newSocketfd);
 // void exitClient( char *buff);
 void serverRecv( int listenfd, char *buff);
 void serverSend( int listenfd, char *buff);
->>>>>>> 815011d6d58794298c690ac19861e4b3c4b8c543
