@@ -45,9 +45,14 @@ int Connect( int sockfd, SA *addr, socklen_t addrlen);
 int Bind( int sockfd, SA *addr, socklen_t addrlen);
 int Listen( int sockfd, int backlog);
 int Accept( int sockfd, SA *addr, socklen_t *addrlen);
-ssize_t Write( int sockfd, void *buff, size_t count);
-ssize_t Read( int sockfd, void *buff, size_t count);
+// ssize_t Write( int sockfd, void *buff, size_t count);
+// ssize_t Read( int sockfd, void *buff, size_t count);
 int Send( int sockfd, const void *buff, size_t length, int flags);
 int Recv( int sockfd, void *buff, size_t length, int flags);
 void createServerSocket( int *listenfd);
-void createClientSocket( int *clientSocket, char *IP_Address);
+void createClientSocket( int *sockfd, char *IP);
+void clientHandle( int listenfd, int *newSocketfd);
+// void exitClient( char *buff);
+void serverRecv( int listenfd, char *buff);
+void serverSend( int listenfd, char *buff);
+>>>>>>> 815011d6d58794298c690ac19861e4b3c4b8c543

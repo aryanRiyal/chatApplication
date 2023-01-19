@@ -7,34 +7,33 @@ int main(int argc, char *argv[]){
     }
     printf("IP Address: %s\n",argv[1]);
 
-    int clientSocket=0;
+    int sockfd=0;
     int maxfd=0;
-    char buff[MAXLINE];
+    char buff[MV];
 
-    createClientSocket( &clientSocket, argv[1]);
+    createClientSocket( &sockfd, argv[1]);
     
-    maxfd = clientSocket;
+    maxfd = sockfd;
 
     while(1){
         memset( buff,'\0', sizeof(buff));
         printf("Client: ");
-        scanf("%[^\n]%*c", &buff[0]);
-        send( clientSocket, buff, strlen(buff), 0);
+        scanf("%[^\n]%*c", buff);
+        
+        Send( sockfd, buff, strlen(buff), 0);
         if(strncmp( buff, ":exit", 5) == 0){
-            close(clientSocket);
+            close(sockfd);
             printf("[-]Disconnected from server.\n");
             exit(1);
         }
-        if(recv( clientSocket, buff, MAXLINE, 0) < 0){
-            printf("[-]Error in receiving data.\n");
-        }else{
-            printf("Server: %s\n", buff);
-        }	
+        Recv( sockfd, buff, MAXLINE, 0);
+        printf("Server: %s\n", buff);	
         /*if(strncmp( buff, ":exit", 5) == 0){
             close(clientSocket);
             printf("[-]Removed from server.\n");
             exit(1);
         }*/
     }
+    close(sockfd);
     return (EXIT_SUCCESS);
 }
