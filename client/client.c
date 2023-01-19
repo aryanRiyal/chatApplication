@@ -1,4 +1,4 @@
-// #include "../header.h"
+#include "../lib/header.h"
 
 int main(int argc, char *argv[]){
     if(argc != 2){
@@ -6,20 +6,15 @@ int main(int argc, char *argv[]){
         exit(EXIT_FAILURE);
     }
     printf("IP Address: %s\n",argv[1]);
-    int clientSocket;
-    struct sockaddr_in serverAddress;
-    char buff[MAXLINE];
-    clientSocket = Socket(AF_INET, SOCK_STREAM, 0);
-    memset( &serverAddress, '\0', sizeof(serverAddress));
-    serverAddress.sin_family = AF_INET;
-    serverAddress.sin_port = htons(11111);
 
-    if(inet_pton(AF_INET, argv[1], &serverAddress.sin_addr)<=0){
-        printf("[-]inet_pton() Error for %s\n", argv[1]);
-        close(clientSocket);
-        exit(EXIT_FAILURE);
-    }
-    Connect( clientSocket, (SA *)&serverAddress, sizeof(serverAddress));
+    int clientSocket=0;
+    int maxfd=0;
+    char buff[MAXLINE];
+
+    createClientSocket( &clientSocket, argv[1]);
+    
+    maxfd = clientSocket;
+
     while(1){
         memset( buff,'\0', sizeof(buff));
         printf("Client: ");
@@ -35,11 +30,11 @@ int main(int argc, char *argv[]){
         }else{
             printf("Server: %s\n", buff);
         }	
-        if(strncmp( buff, ":exit", 5) == 0){
+        /*if(strncmp( buff, ":exit", 5) == 0){
             close(clientSocket);
             printf("[-]Removed from server.\n");
             exit(1);
-        }
+        }*/
     }
     return (EXIT_SUCCESS);
 }
