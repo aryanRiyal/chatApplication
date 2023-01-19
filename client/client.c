@@ -15,7 +15,8 @@ int main(int argc, char *argv[]){
     fd_set exceptset;
 
 
-    createClientSocket( &sockfd, argv[1]);
+    createClientSocket( &sockfd, argv[2]);
+    clientSend(sockfd,argv[1]);	//client_name
     
     maxfd = sockfd;
 

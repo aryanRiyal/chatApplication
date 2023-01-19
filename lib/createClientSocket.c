@@ -27,7 +27,7 @@ int Connect( int sockfd, SA *addr, socklen_t addrlen){
 
 void createClientSocket(int *sockfd, char *IP){
     struct sockaddr_in serverAddress;
-
+    
     *sockfd = Socket(AF_INET, SOCK_STREAM, 0);
     memset( &serverAddress, '\0', sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
@@ -40,6 +40,4 @@ void createClientSocket(int *sockfd, char *IP){
     }
 
     Connect( *sockfd, (SA *)&serverAddress, sizeof(serverAddress));
-
-    clientSend(*sockfd,buff);
 }

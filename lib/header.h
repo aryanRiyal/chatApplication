@@ -12,6 +12,7 @@
 #include <sys/un.h>
 #include <sys/time.h>
 #include <sys/errno.h>
+#include<fcntl.h>
 
 //Macros
 #define MB 1024
@@ -49,7 +50,7 @@ int Connect( int sockfd, SA *addr, socklen_t addrlen);
 int Bind( int sockfd, SA *addr, socklen_t addrlen);
 int Listen( int sockfd, int backlog);
 int Accept( int sockfd, SA *addr, socklen_t *addrlen);
-// ssize_t Write( int sockfd, void *buff, size_t count);
+// ssize_t Write( int sockfd, sockaddr_invoid *buff, size_t count);
 // ssize_t Read( int sockfd, void *buff, size_t count);
 int Send( int sockfd, const void *buff, size_t length, int flags);
 int Recv( int sockfd, void *buff, size_t length, int flags);
@@ -59,17 +60,14 @@ void clientHandle( int listenfd, int *newSocketfd);
 // void exitClient( char *buff);
 void serverRecv( int listenfd, char *buff);
 void serverSend( int listenfd, char *buff);
-void Select(int maxfd,...);
-void serverSelect(int maxfd,...);
-void addNewClient(struct servaddr_in clientInfo,...);
-void processRecvData(int sockfd,char *buff);
+int processRecvData(int socket,char *buffer);
 int findClientIndexName( char *name);
 int findClientIndexList( int socket);
-int processRecvData( int socket, char *buffer);
-void serverSelect(int maxfd,...);
-void addNewClient(struct severaddr_in clientInfo,...);
-void Select(int maxfd,...);
+void serverSelect(int maxfd,int listenfd,fd_set *readset,fd_set *writeset);
+int clientSelect(int maxfd,int sockfd,fd_set *readset,fd_set *writeset);
+void addNewClient(struct sockaddr_in clientInfo,int newSocketfd);
+void Select(int maxfd,fd_set *readset,fd_set *writeset,fd_set *exceptset,struct timeval *timeout);
 void clientRecv( int listenfd, char *buff);
 void clientSend( int listenfd, char *buff);
-int clientBuildfdsets( int listenfd,...);
-int serverBuildfdsets( int listenfd,...);
+int clientBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);
+int serverBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);

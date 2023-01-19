@@ -16,11 +16,10 @@ int Accept( int sockfd, SA *addr, socklen_t *addrlen){
 void addNewClient(struct sockaddr_in clientInfo,int newSocketfd){
 	
 	char ip[INET_ADDRSTRLEN] = {0};
-	char buff[MB] = {0};
 	char name[MAX_NAME_SIZE] = {0};
 
 	//get client name 
-	serverRecv(newSocketfd,buff);
+	serverRecv(newSocketfd,name);
 
 	//get the IP and port of client
 	int port = ntohs(clientInfo.sin_port);
@@ -31,7 +30,6 @@ void addNewClient(struct sockaddr_in clientInfo,int newSocketfd){
 		perror("ERROR: ");
 	}
 	
-	sscanf(buff,"%s ",name);
 	//add the new client data in client list
 	strncpy(server.clientList[server.totalClient].cname,name,strlen(name));
 	server.clientList[server.totalClient].port = port;

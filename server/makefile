@@ -9,7 +9,7 @@ server.o: server.c
 	$(CC) -c server.c
 
 createServerSocket.o: $(LIBPATH)createServerSocket.c $(HEADER)
-	$(CC) -c ../lib/createServerSocket.o
+	$(CC) -c $(LIBPATH)createServerSocket.c
 
 send_recv.o: $(LIBPATH)send_recv.c $(HEADER)  
 	$(CC) -c $(LIBPATH)send_recv.c

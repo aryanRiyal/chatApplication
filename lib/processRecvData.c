@@ -46,16 +46,16 @@ int processRecvData( int socket, char *buffer) {
         sscanf(buffer,"%*[^:]:%s", connectedClient);
         strcpy(server.clientList[indexSender].chatWith, connectedClient);
        
-        indexReceiver = findClientIndexName( server.clientList[indexSender].chatwith);
-        server.clientList[indexSender].chatwithfd = server.clientList[indexReceiver].fileDes;
+        indexReceiver = findClientIndexName( server.clientList[indexSender].chatWith);
+        server.clientList[indexSender].chatWithfd = server.clientList[indexReceiver].fileDes;
         serverSend( server.clientList[indexSender].fileDes, CONNECTED);
         return 0;
     }
 
-    if(strlen( server.clientList[indexSender].chatwith) != 0){
+    if(strlen( server.clientList[indexSender].chatWith) != 0){
         snprintf( bufferSend, sizeof(bufferSend),"[%s] : %s", server.clientList[indexSender].cname, buffer);
         printf( "Buffer  =%s\n",bufferSend);
-        serverSend( server.clientList[indexSender].chatwithfd, bufferSend);
+        serverSend( server.clientList[indexSender].chatWithfd, bufferSend);
     }
     return 0;
 }

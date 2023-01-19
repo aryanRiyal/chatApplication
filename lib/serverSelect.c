@@ -1,6 +1,6 @@
 #include"header.h"
 
-void Select(int maxfd,fd_set *readset,fd_set *writeset,fd_set *exceptset,const struct timeval *timeout){
+void Select(int maxfd,fd_set *readset,fd_set *writeset,fd_set *exceptset,struct timeval *timeout){
 	
 	int n = select(maxfd,readset,writeset,exceptset,timeout);
 
@@ -13,7 +13,7 @@ void Select(int maxfd,fd_set *readset,fd_set *writeset,fd_set *exceptset,const s
 
 
 void serverSelect(int maxfd,int listenfd,fd_set *readset,fd_set *writeset){
-	int newSokcetfd = 0;
+	int newSocketfd = 0;
 	char buff[MB];
 
 	memset(buff,0,sizeof(buff));
