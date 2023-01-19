@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
+#include<sys/select.h>
 #include <string.h>
 #include <strings.h>
 #include <sys/types.h>
@@ -26,8 +27,8 @@
 //Data Structure
 struct client {
     char cname[MAX_NAME_SIZE];
-    char cahtWith[MAX_NAME_SIZE];
-    int chatWithFD;
+    char chatWith[MAX_NAME_SIZE];
+    int chatWithfd;
     int fileDes;
     int port;
     char ip[INET_ADDRSTRLEN];
@@ -57,3 +58,8 @@ void clientHandle( int listenfd, int *newSocketfd);
 // void exitClient( char *buff);
 void serverRecv( int listenfd, char *buff);
 void serverSend( int listenfd, char *buff);
+void Select(int maxfd,...);
+void serverSelect(int maxfd,...);
+void addNewClient(struct servaddr_in clientInfo,...);
+void processRecvData(int sockfd,char *buff);
+

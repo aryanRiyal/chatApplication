@@ -40,4 +40,6 @@ void createClientSocket(int *sockfd, char *IP){
     }
 
     Connect( *sockfd, (SA *)&serverAddress, sizeof(serverAddress));
+
+    clientSend(*sockfd,buff);
 }
