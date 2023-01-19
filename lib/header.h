@@ -49,4 +49,5 @@ ssize_t Write( int sockfd, void *buff, size_t count);
 ssize_t Read( int sockfd, void *buff, size_t count);
 int Send( int sockfd, const void *buff, size_t length, int flags);
 int Recv( int sockfd, void *buff, size_t length, int flags);
-int createServerSocket( int *listenfd);
+void createServerSocket( int *listenfd);
+void createClientSocket( int *clientSocket, char *IP_Address);

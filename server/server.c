@@ -1,3 +1,5 @@
+#include "../lib/header.h"
+
 int main(void){
     int listenfd=0;
     int maxfd=0;
