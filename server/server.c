@@ -1,10 +1,13 @@
+#include "../lib/header.h"
+
 int main(void){
     int listenfd=0;
     int maxfd=0;
+    int newSocketfd=0;
     // struct sockaddr_in clientAddress;
     socklen_t addr_size;
     int n_client=0;
-    char buff[MAXLINE];
+    char buff[MB];
 
     memset(&server,'\0',sizeof(struct serverData));
     // calling socket(), bind(), listen() with error handling
@@ -14,8 +17,9 @@ int main(void){
 
     while(1){
         n_client++;
-        clientSocket = Accept( serverSocket, (SA *)&clientAddress, &addr_size);
+        clientHandle( listenfd, &newSocketfd);
         while(1){
+            /*
             memset( buff,'\0',sizeof(buff));
             recv(clientSocket, buff, MAXLINE, 0);
             if(strncmp(buff, ":exit",5)==0){
@@ -25,6 +29,9 @@ int main(void){
                 printf("Client(%d): %s\n",n_client, buff);
                 send( clientSocket, buff, strlen(buff), 0);
                 memset( buff, '\0', sizeof(buff));
+                */
+            serverRecv( listenfd, buff);
+            serverSend( listenfd, buff);
             }
         }
         close(clientSocket);
