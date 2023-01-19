@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
-#include<sys/select.h>
+#include <sys/select.h>
 #include <string.h>
 #include <strings.h>
 #include <sys/types.h>
@@ -21,6 +21,7 @@
 #define BACKLOG 10
 #define MAX_NAME_SIZE 20
 #define NO_OF_CLIENTS 10
+#define CONNECTED "Connection Established..."
 
 #define SA struct sockaddr
 
@@ -62,4 +63,13 @@ void Select(int maxfd,...);
 void serverSelect(int maxfd,...);
 void addNewClient(struct servaddr_in clientInfo,...);
 void processRecvData(int sockfd,char *buff);
-
+int findClientIndexName( char *name);
+int findClientIndexList( int socket);
+int processRecvData( int socket, char *buffer);
+void serverSelect(int maxfd,...);
+void addNewClient(struct severaddr_in clientInfo,...);
+void Select(int maxfd,...);
+void clientRecv( int listenfd, char *buff);
+void clientSend( int listenfd, char *buff);
+int clientBuildfdsets( int listenfd,...);
+int serverBuildfdsets( int listenfd,...);
