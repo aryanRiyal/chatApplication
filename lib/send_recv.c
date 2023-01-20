@@ -29,12 +29,13 @@ void clientRecv( int listenfd, char *buff){
     int readBytes = 0; 
     memset( buff, '\0', sizeof(buff));
     readBytes = Recv(  listenfd, buff, sizeof(buff), 0);
+    printf("%s\n",buff);
 }
 
 /* clientSend */
 void clientSend( int listenfd, char *buff){
     int writeBytes = 0;
-    memset( buff, '\0', sizeof(buff));
+    //memset( buff, '\0', sizeof(buff));
     writeBytes = Send( listenfd, buff, sizeof(buff), 0 );
 }
 
@@ -50,7 +51,7 @@ void serverRecv( int listenfd, char *buff){
 /* serverSend */
 void serverSend( int listenfd, char *buff){
     int writeBytes = 0;
-    memset( buff, '\0', sizeof(buff));
+   // memset( buff, '\0', sizeof(buff));
 
     writeBytes = Send( listenfd, buff, sizeof(buff), 0);
     printf("\n[CLIENT : %d] || Wrote [%d] number of bytes || BYTES = [%s]\n", listenfd, writeBytes, buff);
