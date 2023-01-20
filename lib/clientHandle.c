@@ -20,12 +20,12 @@ void addNewClient(struct sockaddr_in clientInfo,int newSocketfd){
 
 	//get client name 
 	serverRecv(newSocketfd,name);
-	printf("name : %s\n",name);
+//	printf("name : %s\n",name);
 
 	//get the IP and port of client
 	int port = ntohs(clientInfo.sin_port);
 	inet_ntop(AF_INET,&clientInfo.sin_addr,ip,INET_ADDRSTRLEN);
-	printf("[Client-Info] : Port = %d, IP = %s\n",port,ip);
+	printf("[Client-Info]: Name = %s, Port = %d, IP = %s\n",name,port,ip);
 
 	if(server.totalClient >= NO_OF_CLIENTS){
 		perror("ERROR: ");

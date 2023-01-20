@@ -36,30 +36,35 @@ int processRecvData( int socket, char *buffer) {
          memset( buffer, 0, sizeof(buffer));
          for(int i=0;i<server.totalClient;i++) {
              strcat( buffer, server.clientList[i].cname);
-             printf("cname: %s", server.clientList[i].cname);
+  //           printf("cname: %s", server.clientList[i].cname);
              strcat( buffer,";");
          }
-	 printf("buffer send by the server: %s\n",buffer);
+//	 printf("buffer send by the server: %s\n",buffer);
         serverSend( socket, buffer);
         return 0;
     }
     if(strncmp(buffer, "CONNECT",7) == 0) {
         
-	printf("\nbuffer: %s\n",buffer);
+//	printf("\nbuffer: %s\n",buffer);
         sscanf(buffer,"%*[^:]:%s",connectedClient);
-	printf("\nconnected client: %s\n",connectedClient);
+//	printf("\nconnected client: %s\n",connectedClient);
         strcpy(server.clientList[indexSender].chatWith, connectedClient);
        
         indexReceiver = findClientIndexName( server.clientList[indexSender].chatWith);
         server.clientList[indexSender].chatWithfd = server.clientList[indexReceiver].fileDes;
-	printf("CONNECTED: %s\n",CONNECTED);
+//	printf("CONNECTED: %s\n",CONNECTED);
         serverSend( server.clientList[indexSender].fileDes, CONNECTED);
         return 0;
     }
+	
+  /*  if(strncmp(buffer,"EXIT",4) == 0){
+	    serverExitClient(socket);
+	    return 0;
+    }*/
 
     if(strlen( server.clientList[indexSender].chatWith) != 0){
         snprintf( bufferSend, sizeof(bufferSend),"[%s] : %s", server.clientList[indexSender].cname, buffer);
-        printf( "Buffer  = %s\n",bufferSend);
+        printf( "Buffer  = %s",bufferSend);
         serverSend( server.clientList[indexSender].chatWithfd, bufferSend);
     }
     return 0;

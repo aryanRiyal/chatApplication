@@ -1,11 +1,11 @@
 CC = gcc
 LIBPATH = ../lib/
-LIB = createClientSocket.o send_recv.o clientSelect.o clientBuildfdsets.o processRecvData.o
+LIB = createClientSocket.o send_recv.o clientSelect.o clientBuildfdsets.o clientSendRecv.o
 
 HEADER = $(LIBPATH)header.h
 
 runC: client.o $(LIB)
-	$(CC) client.o $(LIB) -o runC
+	$(CC) -o runC client.o $(LIB)
 
 client.o: client.c $(HEADER)
 	$(CC) -c client.c
@@ -22,8 +22,8 @@ clientBuildfdsets.o: $(LIBPATH)clientBuildfdsets.c $(HEADER)
 clientSelect.o: $(LIBPATH)clientSelect.c $(HEADER)
 	$(CC) -c $(LIBPATH)clientSelect.c
 
-processRecvData.o: $(LIBPATH)processRecvData.c $(HEADER)
-	$(CC) -c $(LIBPATH)processRecvData.c
+clientSendRecv.o: $(LIBPATH)clientSendRecv.c $(HEADER)
+	$(CC) -c $(LIBPATH)clientSendRecv.c
 
 clean: 
 	rm $(LIB) client.o runC
