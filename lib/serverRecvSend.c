@@ -6,6 +6,9 @@ void serverRecv( int listenfd, char *buff){
     memset(buff, '\0', sizeof(buff));
 
     readBytes = Recv( listenfd, buff,MB, 0);
+    if(readBytes == 0){
+	    serverExitClient(listenfd);
+    }
     processRecvData( listenfd, buff);
 }
 
@@ -15,6 +18,6 @@ void serverSend( int listenfd, char *buff){
    // memset( buff, '\0', sizeof(buff));
 
     writeBytes = Send( listenfd, buff, strlen(buff), 0);
-    printf("\n[CLIENT : %d] || Wrote [%d] number of bytes || BYTES = [%s]\n", listenfd, writeBytes, buff);
+    printf("\n[CLIENT : %d] || Wrote [%d] number of bytes || BYTES = %s \n", listenfd, writeBytes, buff);
 }
 

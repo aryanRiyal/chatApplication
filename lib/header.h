@@ -57,7 +57,7 @@ int Recv( int sockfd, void *buff, size_t length, int flags);
 void createServerSocket( int *listenfd);
 void createClientSocket( int *sockfd, char *IP);
 void clientHandle( int listenfd, int *newSocketfd);
-// void exitClient( char *buff);
+void serverExitClient(int socketfdDel);
 void serverRecv( int listenfd, char *buff);
 void serverSend( int listenfd, char *buff);
 int processRecvData(int socket,char *buffer);

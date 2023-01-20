@@ -6,6 +6,10 @@ void clientRecv( int listenfd, char *buff){
     memset( buff, '\0', sizeof(buff));
 
     readBytes = Recv(  listenfd, buff,MB, 0);
+    if(readBytes == 0){
+	    printf("[-]Client Disconnected.\n");
+	    exit(0);
+    }
     printf("%s\n",buff);
 }
 
@@ -14,6 +18,6 @@ void clientSend( int listenfd, char *buff){
     int writeBytes = 0;
     //memset( buff, '\0', sizeof(buff));
     writeBytes = Send( listenfd, buff, strlen(buff), 0 );
-    printf("client send writebytes: %i buff: %s\n",writeBytes,buff);
+//    printf("client send writebytes: %i buff: %s\n",writeBytes,buff);
 }
 
