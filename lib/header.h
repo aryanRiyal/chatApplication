@@ -43,32 +43,37 @@ struct serverData {
 
 struct serverData server;
 
+// Function Declarations
 
-//Function Declarations
+// Server Functions
+void createServerSocket( int *listenfd);
 int Socket( int family, int type, int protocol);
-int Connect( int sockfd, SA *addr, socklen_t addrlen);
 int Bind( int sockfd, SA *addr, socklen_t addrlen);
 int Listen( int sockfd, int backlog);
-int Accept( int sockfd, SA *addr, socklen_t *addrlen);
-// ssize_t Write( int sockfd, sockaddr_invoid *buff, size_t count);
-// ssize_t Read( int sockfd, void *buff, size_t count);
-int Send( int sockfd,void *buff, size_t length, int flags);
-int Recv( int sockfd, void *buff, size_t length, int flags);
-void createServerSocket( int *listenfd);
-void createClientSocket( int *sockfd, char *IP);
+int serverBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);
+void serverSelect(int maxfd,int listenfd,fd_set *readset,fd_set *writeset);
 void clientHandle( int listenfd, int *newSocketfd);
-// void exitClient( char *buff);
+int Accept( int sockfd, SA *addr, socklen_t *addrlen);
+void addNewClient(struct sockaddr_in clientInfo,int newSocketfd);
 void serverRecv( int listenfd, char *buff);
 void serverSend( int listenfd, char *buff);
 int processRecvData(int socket,char *buffer);
 int findClientIndexName( char *name);
 int findClientIndexList( int socket);
-void serverSelect(int maxfd,int listenfd,fd_set *readset,fd_set *writeset);
-int clientSelect(int maxfd,int sockfd,fd_set *readset,fd_set *writeset);
-void addNewClient(struct sockaddr_in clientInfo,int newSocketfd);
-void Select(int maxfd,fd_set *readset,fd_set *writeset,fd_set *exceptset,struct timeval *timeout);
-void clientRecv( int listenfd, char *buff);
-void clientSend( int listenfd, char *buff);
-int clientBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);
-int serverBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);
+void serverExitClient( int socketfdDel);
 
+// Common Functions
+int Send( int sockfd,void *buff, size_t length, int flags);
+int Recv( int sockfd, void *buff, size_t length, int flags);
+void Select(int maxfd,fd_set *readset,fd_set *writeset,fd_set *exceptset,struct timeval *timeout);
+
+// Client Functions
+void createClientSocket( int *sockfd, char *IP);
+int Connect( int sockfd, SA *addr, socklen_t addrlen);
+int clientBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);
+int clientSelect(int maxfd,int sockfd,fd_set *readset,fd_set *writeset);
+void clientSend( int listenfd, char *buff);
+void clientRecv( int listenfd, char *buff);
+
+// ssize_t Write( int sockfd, sockaddr_invoid *buff, size_t count);
+// ssize_t Read( int sockfd, void *buff, size_t count);
