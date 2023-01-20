@@ -20,6 +20,7 @@ void addNewClient(struct sockaddr_in clientInfo,int newSocketfd){
 
 	//get client name 
 	serverRecv(newSocketfd,name);
+	printf("name : %s\n",name);
 
 	//get the IP and port of client
 	int port = ntohs(clientInfo.sin_port);

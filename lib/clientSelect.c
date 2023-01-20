@@ -1,8 +1,11 @@
 #include "header.h"
 
 int clientSelect(int maxfd, int listenfd, fd_set *readset, fd_set *writeset){
-    char buff[MB];
+    char sendBuff[MB];
+    char recvBuff[MB];
     
+    memset(sendBuff, '\0', MB);
+    memset(recvBuff, '\0', MB);
     int action = select( maxfd+1, readset, writeset, NULL, NULL);
 
     if( action == -1 || action == 0) {
@@ -10,14 +13,13 @@ int clientSelect(int maxfd, int listenfd, fd_set *readset, fd_set *writeset){
         exit(0);
     }
 
-    memset( buff, '\0', sizeof(buff));
     if(FD_ISSET(listenfd, readset)){
-        clientRecv( listenfd, buff);
+        clientRecv( listenfd, recvBuff);
     }
 
     if(FD_ISSET(STDIN_FILENO, readset)){
-	    if(read(0,buff,sizeof(buff)) > 0){
-        	clientSend( listenfd, buff);
+	    if(read(0,sendBuff,MB) > 0){
+        	clientSend( listenfd, sendBuff);
 		}
     }
 

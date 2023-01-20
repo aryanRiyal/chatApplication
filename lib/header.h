@@ -52,7 +52,7 @@ int Listen( int sockfd, int backlog);
 int Accept( int sockfd, SA *addr, socklen_t *addrlen);
 // ssize_t Write( int sockfd, sockaddr_invoid *buff, size_t count);
 // ssize_t Read( int sockfd, void *buff, size_t count);
-int Send( int sockfd, const void *buff, size_t length, int flags);
+int Send( int sockfd,void *buff, size_t length, int flags);
 int Recv( int sockfd, void *buff, size_t length, int flags);
 void createServerSocket( int *listenfd);
 void createClientSocket( int *sockfd, char *IP);
@@ -71,3 +71,4 @@ void clientRecv( int listenfd, char *buff);
 void clientSend( int listenfd, char *buff);
 int clientBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);
 int serverBuildfdsets( int listenfd,fd_set *readset, fd_set *writeset, fd_set *exceptset);
+

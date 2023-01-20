@@ -45,7 +45,8 @@ int processRecvData( int socket, char *buffer) {
     }
     if(strncmp(buffer, "CONNECT",7) == 0) {
         
-        sscanf(buffer,"%*[^:]:%s", connectedClient);
+	printf("\nbuffer: %s\n",buffer);
+        sscanf(buffer,"%*[^:]:%s",connectedClient);
 	printf("\nconnected client: %s\n",connectedClient);
         strcpy(server.clientList[indexSender].chatWith, connectedClient);
        

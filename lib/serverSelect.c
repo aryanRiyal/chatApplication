@@ -14,10 +14,11 @@ void Select(int maxfd,fd_set *readset,fd_set *writeset,fd_set *exceptset,struct 
 
 void serverSelect(int maxfd,int listenfd,fd_set *readset,fd_set *writeset){
 	int newSocketfd = 0;
-	char buff[MB];
+	char sendBuff[MB];
+	char recvBuff[MB];
 
-	memset(buff,0,sizeof(buff));
-
+	memset(sendBuff,0,sizeof(sendBuff));
+	memset(recvBuff,0,sizeof(recvBuff));
 	Select(maxfd+1,readset,writeset,NULL,NULL);
 	
 	//check the server listenfd
@@ -27,17 +28,16 @@ void serverSelect(int maxfd,int listenfd,fd_set *readset,fd_set *writeset){
 	}
 
 	if(FD_ISSET(STDIN_FILENO,readset)){
-		if(read(0,buff,sizeof(buff)) > 0){
+		if(read(0,sendBuff,sizeof(sendBuff)) > 0){
 			for(int i = 0; i < server.totalClient; i++){
-				serverSend(server.clientList[i].fileDes,buff);
+				serverSend(server.clientList[i].fileDes,sendBuff);
 			}
 		}
 	}
 	
-	memset(buff,0,sizeof(buff));
 	for(int i = 0;i < server.totalClient;i++){
 		if(FD_ISSET(server.clientList[i].fileDes,readset)){
-			serverRecv(server.clientList[i].fileDes,buff);
+			serverRecv(server.clientList[i].fileDes,recvBuff);
 		}
 	}
 }

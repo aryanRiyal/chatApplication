@@ -9,19 +9,20 @@ int main(int argc, char *argv[]){
 
     int sockfd=0;
     int maxfd=0;
-    char buff[MB];
+    char buff[MAX_NAME_SIZE];
+
     fd_set readset;
     fd_set writeset;
     fd_set exceptset;
-
+	
+    strcpy(buff,argv[1]);
 
     createClientSocket( &sockfd, argv[2]);
-    clientSend(sockfd,argv[1]);	//client_name
-    
-    maxfd = sockfd;
+    //printf("siezof(buff) : %ld\n",sizeof(buff));
+    clientSend(sockfd,buff);	//client_name
 
     while(1){
-        memset( buff,'\0', sizeof(buff));
+      //  memset( buff,'\0', sizeof(buff));
         
 	maxfd = clientBuildfdsets(sockfd,&readset,&writeset,&exceptset);
 	clientSelect(maxfd,sockfd,&readset,&writeset);
