@@ -1,6 +1,6 @@
 CC = gcc 
 LIBPATH = ../lib/
-LIB = createServerSocket.o  send_recv.o clientHandle.o serverBuildfdsets.o processRecvData.o serverSelect.o\
+LIB = createServerSocket.o send_recv.o clientHandle.o serverBuildfdsets.o processRecvData.o serverSelect.o\
       serverRecvSend.o serverExitClient.o
 HEADER = $(LIBPATH)header.h
 

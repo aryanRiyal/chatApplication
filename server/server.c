@@ -7,20 +7,16 @@ int main(void){
     fd_set writeset;
     fd_set exceptset;
     char buff[MB];
-
     memset(&server,'\0',sizeof(struct serverData));
     // calling socket(), bind(), listen() with error handling
     createServerSocket( &listenfd);
-
     maxfd = listenfd;
-
     while(1){
         maxfd = serverBuildfdsets(listenfd,&readset,&writeset,&exceptset);
-	serverSelect(maxfd,listenfd,&readset,&writeset);
+        serverSelect(maxfd,listenfd,&readset,&writeset);
     }
- 
     close(listenfd);
-    //cleanup();
+    // cleanup();
     printf("\n...Terminating the session...\n");
     return (EXIT_SUCCESS);
 }

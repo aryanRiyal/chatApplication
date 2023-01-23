@@ -12,7 +12,7 @@
 #include <sys/un.h>
 #include <sys/time.h>
 #include <sys/errno.h>
-#include<fcntl.h>
+#include <fcntl.h>
 
 //Macros
 #define MB 1024
@@ -22,7 +22,7 @@
 #define BACKLOG 10
 #define MAX_NAME_SIZE 20
 #define NO_OF_CLIENTS 10
-#define CONNECTED "Connection Established..."
+#define CONNECTED "Connection Established...\n"
 
 #define SA struct sockaddr
 
@@ -55,7 +55,7 @@ void serverSelect(int maxfd,int listenfd,fd_set *readset,fd_set *writeset);
 void clientHandle( int listenfd, int *newSocketfd);
 int Accept( int sockfd, SA *addr, socklen_t *addrlen);
 void addNewClient(struct sockaddr_in clientInfo,int newSocketfd);
-void serverRecv( int listenfd, char *buff);
+int serverRecv( int listenfd, char *buff, int f);
 void serverSend( int listenfd, char *buff);
 int processRecvData(int socket,char *buffer);
 int findClientIndexName( char *name);
