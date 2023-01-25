@@ -53,13 +53,13 @@ int processRecvData( int socket, char *buffer) {
         return 0;
     }
 
-    /*
        if(strncmp(buffer,"EXIT",4) == 0){
-       printf("\nsocket=%d\nconnected with=%d\n\n", socket, server.clientList[indexSender].chatWithfd);
+       // printf("\nsocket=%d\nconnected with=%d\n\n", socket, server.clientList[indexSender].chatWithfd);
+       // printf("%d\n",server.totalClient);
        serverExitClient(socket);
+       // printf("%d\n",server.totalClient);
        return 0;
        }
-       */
 
     if(strncmp(buffer,"ALL",3)==0){
         sscanf(buffer,"%*[^:]:%[^\n]%*c",toAll);

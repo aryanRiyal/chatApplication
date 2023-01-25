@@ -21,14 +21,14 @@ void serverSelect( int maxfd, int listenfd, fd_set *readset, fd_set *writeset){
         printf("New Socket Created: %d\n",newSocketfd);
     }
     /*
-       if(FD_ISSET(STDIN_FILENO,readset)){
-       if(read(0,sendBuff,sizeof(sendBuff)) > 0){
-       for(int i = 0; i < server.totalClient; i++){
-       serverSend(server.clientList[i].fileDes,sendBuff);
-       }
-       }
-       }
-       */
+    if(FD_ISSET(STDIN_FILENO,readset)){
+        if(read(0,sendBuff,sizeof(sendBuff)) > 0){
+            for(int i = 0; i < server.totalClient; i++){
+                serverSend(server.clientList[i].fileDes,sendBuff);
+            }
+        }
+    }
+    */
     for(int i = 0;i < server.totalClient;i++){
         if(FD_ISSET(server.clientList[i].fileDes,readset)){
             serverRecv(server.clientList[i].fileDes,recvBuff,0);

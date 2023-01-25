@@ -21,7 +21,7 @@ int Connect( int sockfd, SA *addr, socklen_t addrlen){
         close(sockfd);
         exit(EXIT_FAILURE);
     }
-    printf("[+]Connection Established\n");
+    printf("[+]Connection Established\n\n");
     return (n);
 }
 

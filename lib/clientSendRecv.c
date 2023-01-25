@@ -9,7 +9,7 @@ void clientRecv( int listenfd, char *buff){
         printf("[-]Client Disconnected.\n");
         exit(0);
     }
-    printf("%s",buff);
+    printf("%s\n",buff);
 }
 
 /* clientSend */

@@ -4,6 +4,7 @@
 int serverRecv( int listenfd, char *buff, int f){
     int readBytes = 0;
     memset(buff, '\0', sizeof(buff));
+    // to differentiate between the call with a name or with the message
     if(f==0)
         readBytes = Recv( listenfd, buff,MB, 0);
     else{
